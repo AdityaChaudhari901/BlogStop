@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link'; // ✅ Import Link
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Footer from '@/components/Footer';
+import Footer from "@/components/Footer";
 
 const Page = () => {
     const { id } = useParams();
