@@ -1,21 +1,34 @@
-import { assets } from '@/Assets/assets'
-import Image from 'next/image'
-import React from 'react'
+import { assets } from '@/Assets/assets';
+import Image from 'next/image';
+import React from 'react';
 
 const Footer = () => {
   return (
-    <div className='flex justify-around flex-col gap-2 sm:flex-row bg-black py-5 items-center'>
-        <Image src={assets.logo_light} alt='' width={120}/>
-        <p className='text-sm text-white'>All rights reserved. Copyright @BlogStop</p>
-        <div className='flex gap-4'>
-        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><Image src={assets.facebook_icon} alt='Facebook' width={40} className="cursor-pointer" /></a>
-        <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer"><Image src={assets.twitter_icon} alt='Twitter' width={40} className="cursor-pointer" /></a>
-        <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer"><Image src={assets.googleplus_icon} alt='Google Plus' width={40} className="cursor-pointer" /></a>
-</div>
+    <div className="w-full min-h-[120px] bg-black py-10 px-8 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+      {/* Logo Section */}
+      <div className="flex justify-center sm:justify-start w-full sm:w-auto mb-4 sm:mb-0">
+        <Image src={assets.logo_light} alt="BlogStop Logo" width={160} />
+      </div>
 
-      
+      {/* Copyright Text */}
+      <p className="text-white text-base w-full sm:w-auto mb-4 sm:mb-0">
+        © {new Date().getFullYear()} BlogStop. All rights reserved.
+      </p>
+
+      {/* Social Media Links */}
+      <div className="flex gap-6">
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+          <Image src={assets.facebook_icon} alt="Facebook" width={50} className="cursor-pointer" />
+        </a>
+        <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+          <Image src={assets.twitter_icon} alt="Twitter" width={50} className="cursor-pointer" />
+        </a>
+        <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
+          <Image src={assets.googleplus_icon} alt="Google Plus" width={50} className="cursor-pointer" />
+        </a>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

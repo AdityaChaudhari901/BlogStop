@@ -1,28 +1,50 @@
 'use client'
-import { assets, blog_data } from '@/Assets/assets';
+import { assets } from '@/Assets/assets';
 import Image from 'next/image';
-import Link from 'next/link'; // ✅ Import Link
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Footer from "@/components/Footer";
+import axios from 'axios';
 
 const Page = () => {
     const { id } = useParams();
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!id) return;
-
-        const blog = blog_data.find(blog => blog.id === Number(id));
-        if (blog) {
-            setData(blog);
-            console.log("Fetched Blog Data:", blog);
-        } else {
-            console.warn("Blog not found for ID:", id);
+        if (!id) {
+            setError("Invalid blog ID");
+            setLoading(false);
+            return;
         }
+
+        const fetchBlog = async () => {
+            try {
+                console.log("Fetching blog with ID:", id);
+                const response = await axios.get(`/api/blog?id=${id}`);
+                
+                if (response.data.error) {
+                    throw new Error(response.data.error);
+                }
+
+                setData(response.data);
+                console.log("Fetched Blog Data:", response.data);
+            } catch (error) {
+                console.error("Error fetching blog:", error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBlog();
     }, [id]);
 
-    if (!data) return <p className="text-center text-lg py-10">Loading...</p>;
+    if (loading) return <p className="text-center text-lg py-10">Loading...</p>;
+    if (error) return <p className="text-center text-lg py-10 text-red-500">Error: {error}</p>;
+    if (!data) return <p className="text-center text-lg py-10 text-red-500">Blog not found.</p>;
 
     return (
         <div className='bg-gray-200 py-5 px-5 md:px-12 lg:px-28'>
@@ -37,7 +59,9 @@ const Page = () => {
 
             <div className='text-center my-24'>
                 <h1 className='text-2xl sm:text-5xl font-semibold max-w-[700px] mx-auto'>{data.title}</h1>
-                <Image className='mx-auto mt-6 border border-white rounded-full' src={data.author_img} width={60} height={60} alt={data.author} />
+                {data.authorImg && (
+                    <Image className='mx-auto mt-6 border border-white rounded-full' src={data.authorImg} width={60} height={60} alt={data.author} />
+                )}
                 <p className='mt-1 pb-2 text-lg max-w-[740px] mx-auto'>{data.author}</p>
             </div>
 
@@ -46,7 +70,7 @@ const Page = () => {
                 <h1 className='my-8 text-[26px] font-semibold'>Introduction:</h1>
                 <p>{data.description}</p>
 
-                {/** 🔥 Step-wise Content (Avoid repetition) **/}
+                {/** 🔥 Step-wise Content **/}
                 {[...Array(4)].map((_, i) => (
                     <div key={i}>
                         <h3 className='my-5 text-[18px] font-semibold'>Step {i + 1}: Self-reflection and Goal setting</h3>
@@ -74,7 +98,10 @@ const Page = () => {
                 </div>
             </div>
 
-            <Footer />
+            {/** Full-Width Footer **/}
+            <div className="w-full mt-10">
+                <Footer />
+            </div>
         </div>
     );
 };
