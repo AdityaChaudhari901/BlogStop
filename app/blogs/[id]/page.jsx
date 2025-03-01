@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Footer from "@/components/Footer";
+import Footer from "@/Components/Footer";
 import axios from 'axios';
 
 const Page = () => {
