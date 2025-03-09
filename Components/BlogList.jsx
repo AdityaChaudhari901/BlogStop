@@ -29,7 +29,7 @@ const BlogList = () => {
             key={cat}
             onClick={() => setMenu(cat)}
             className={`py-1 px-4 rounded-sm border border-black transition-all duration-200 ${
-              menu === cat ? 'bg-black text-white' : 'hover:bg-black hover:text-white'
+              menu === cat ? 'bg-black text-white shadow-md' : 'hover:bg-black hover:text-white'
             }`}
           >
             {cat}
@@ -37,7 +37,6 @@ const BlogList = () => {
         ))}
       </div>
 
-      {/* ✅ Updated Layout: Grid-based for clean alignment */}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 xl:px-24 mb-16'>
         {blogs.length > 0 ? (
           blogs
