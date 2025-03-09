@@ -37,11 +37,12 @@ const BlogList = () => {
         ))}
       </div>
 
-      <div className='flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24'>
+      {/* ✅ Updated Layout: Grid-based for clean alignment */}
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 xl:px-24 mb-16'>
         {blogs.length > 0 ? (
           blogs
             .filter((item) =>
-              menu === "All" ? true : item.category?.toLowerCase() === menu.toLowerCase()
+              menu === 'All' ? true : item.category?.toLowerCase() === menu.toLowerCase()
             )
             .map((item, index) => (
               <BlogItem
@@ -54,7 +55,7 @@ const BlogList = () => {
               />
             ))
         ) : (
-          <p className='text-center text-gray-500 w-full'>No blogs available.</p>
+          <p className='text-center text-gray-500 w-full col-span-full'>No blogs available.</p>
         )}
       </div>
     </div>
