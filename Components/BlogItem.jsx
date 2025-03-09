@@ -1,4 +1,3 @@
-import { assets } from '@/Assets/assets';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -16,7 +15,7 @@ const BlogItem = ({ title, description, category, image, id }) => {
           {description.slice(0, 120)}...
         </p>
         <Link href={`/blogs/${id}`} className='inline-flex items-center py-2 font-semibold text-center text-black'>
-          Read More <Image src={assets.arrow} className='ml-2' alt='Arrow' width={12} />
+          Read More <Image src="/assets/arrow.png" className='ml-2' alt='Arrow' width={12} height={12} />
         </Link>
       </div>
     </div>
