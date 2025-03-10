@@ -2,6 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 
 const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <div className="w-full min-h-[120px] bg-black py-10 px-8 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
       {/* Logo Section */}
@@ -11,7 +13,7 @@ const Footer = () => {
 
       {/* Copyright Text */}
       <p className="text-white text-base w-full sm:w-auto mb-4 sm:mb-0">
-        © {new Date().getFullYear()} BlogStop. All rights reserved.
+        © {year} BlogStop. All rights reserved.
       </p>
 
       {/* Social Media Links */}
